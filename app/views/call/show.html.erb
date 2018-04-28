@@ -1,0 +1,28 @@
+<h1 class="ui header">Call details</h1>
+
+<p><b>Call unique ID: </b><%= @call.uid %></p>
+
+<p><b>Date: </b><%= @call.created_at %></p>
+
+<p><b>Duration: </b><%= @call.duration %></p>
+
+<p><b>Final_action: </b>
+  <%= 'Call has been redirected to personnal number' if @call.final_action == 'redirected' %>
+  <%= 'Caller left an audio message' if @call.final_action == 'left_message' %>
+  <%= 'Nothing has been done' if @call.final_action.nil? %>
+</p>
+
+<p><b>Caller: </b><%= @call.from %></p>
+<% unless @call.recording_url.nil? %>
+  <p><b>Recording:</b>
+    <%= link_to @call.recording_url, class: 'ui blue icon button' do %>
+        <i class="download icon"></i>
+    <% end %>
+  </p>
+<% end %>
+
+<% unless @call.recording_url.nil? %>
+  <p><b>Recording Duration: </b><%= @call.recording_duration %></p>
+<% end %>
+
+<%= link_to 'Back', '/call', class: 'ui green button' %>

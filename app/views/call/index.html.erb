@@ -1,0 +1,38 @@
+<h1 class="ui header">Call list</h1>
+
+<table class="ui striped celled table">
+  <tr>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Caller</th>
+    <th>Action</th>
+    <th>Duration</th>
+    <th>Audio message</th>
+    <th></th>
+  </tr>
+  <% @calls.each do |c| %>
+    <tr>
+      <td><%= c.created_at %></td>
+      <td><%= c.status %></td>
+      <td><%= c.from %></td>
+      <td>
+        <%= c.final_action %>
+        <%= 'Nothing' if c.final_action.nil? %>
+      </td>
+      <td><%= c.duration %>s</td>
+      <td>
+        <% unless c.recording_url.nil? %>
+            <i class="check green icon"></i>
+        <% else %>
+            <i class="times red icon"></i>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to 'Show', '/call/' + c.id.to_s, class: 'ui blue button' %>
+        <%= link_to '/call/' + c.id.to_s, method: :delete, class: 'ui red icon button', data: { confirm: 'Are you sure to delete this call?' } do %>
+            <i class="trash icon"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

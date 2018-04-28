@@ -6,9 +6,21 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_include_tag 'https://code.jquery.com/jquery.min.js'%>
+    <%= javascript_include_tag 'https://code.jquery.com/ui/1.12.1/jquery-ui.js'%>
+
+    <%= stylesheet_link_tag    'https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css'%>
+    <%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js'%>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="ui container" style="margin-top: 80px">
+      <div class="ui grid">
+        <div class="ui sixteen wide column">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
