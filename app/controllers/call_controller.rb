@@ -1,6 +1,6 @@
 class CallController < ApplicationController
   def index
-    @calls = Call.all
+    @calls = Call.all.order(created_at: :desc)
   end
 
   def show
