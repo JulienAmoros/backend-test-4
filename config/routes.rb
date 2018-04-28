@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   scope path: 'call' do
+    root to: 'call#index'
     get '/:id', to: 'call#show'
     # delete '/:id', to: 'call#delete'
     get '/delete/:id', to: 'call#delete' # Kind of dirty but to force delete route for calls
