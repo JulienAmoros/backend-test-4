@@ -29,7 +29,7 @@
       </td>
       <td>
         <%= link_to 'Show', '/call/' + c.id.to_s, class: 'ui blue button' %>
-        <%= link_to '/call/delete/' + c.id.to_s, class: 'ui red icon button', data: { confirm: 'Are you sure to delete this call?' } do %>
+        <%= link_to '/call/' + c.id.to_s, method: :delete, class: 'ui red icon button', data: { confirm: 'Are you sure to delete this call?' } do %>
             <i class="trash icon"></i>
         <% end %>
       </td>

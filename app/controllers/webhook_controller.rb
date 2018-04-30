@@ -1,8 +1,8 @@
 class WebhookController < ApplicationController
+  before_action :get_or_create_call #, :authenticate
+
   def incoming
     @response = Twilio::TwiML::VoiceResponse.new
-
-    get_or_create_call
 
     # Do things depending on Digits received, ask for action otherwise
     if params['Digits']
@@ -28,8 +28,6 @@ class WebhookController < ApplicationController
 
   # Recording Callback
   def message
-    get_or_create_call
-
     @call.update(
              recording_url: params['RecordingUrl'],
              recording_duration: params['RecordingDuration'],
@@ -39,8 +37,6 @@ class WebhookController < ApplicationController
 
   # Status Callback
   def call_status
-    get_or_create_call
-
     @call.update(
         status: params['CallStatus'],
         duration: params['CallDuration'],
@@ -48,6 +44,18 @@ class WebhookController < ApplicationController
   end
 
   private
+
+  # Validate API authenticity
+  # def authenticate
+  #   auth_token = ENV['TWILIO_TOKEN']
+  #   validator = Twilio::Security::RequestValidator.new(auth_token)
+  #
+  #   post_vars = params.reject { |k, _| k.downcase == k }
+  #   twilio_signature = request.headers['HTTP_X_TWILIO_SIGNATURE']
+  #
+  #   validator.validate(request.url, post_vars, twilio_signature)
+  # end
+
   # Add instructions to redirect call to personnal number defined in <PROJETC_ROOT>/.env
   def redirect_call
     @response.say('You are being redirected')
